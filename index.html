@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order & Payment</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 15px; }
+        .box { max-width: 400px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #333; font-size: 20px; }
+        label { font-weight: bold; display: block; margin-top: 10px; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        button:hover { background: #218838; }
+        .qr-section { text-align: center; margin-top: 15px; background: #f9f9f9; padding: 10px; border-radius: 5px; }
+        .qr-section img { width: 150px; height: 150px; }
+        .note { font-size: 12px; color: #d9534f; margin-top: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>ऑर्डर और पेमेंट पेज</h2>
+    
+    <!-- Gmail Login (Simple Input for Mobile) -->
+    <label>अपनी Gmail आईडी दर्ज करें:</label>
+    <input type="email5" id="user-email" placeholder="example@gmail.com">
+
+    <label>सर्विस चुनें</label>
+    <select id="service-type">
+        <option value="Instagram Reels">Instagram Reels</option>
+        <option value="Instagram Followers">Instagram Followers</option>
+        <option value="YouTube Views">YouTube Views</option>
+    </select>
+
+    <label>क्वांटिटी (जैसे: 10K)</label>
+    <input type="text" id="quantity" placeholder="उदा. 10K">
+
+    <label>अपना लिंक (URL) डालें</label>
+    <input type="text" id="user-link" placeholder="यहाँ लिंक पेस्ट करें">
+
+    <!-- PhonePe QR & Link (No Mobile Number) -->
+    <div class="qr-section">
+        <p style="margin: 5px 0; font-size: 13px;"><b>PhonePe स्कैनर से स्कैन करें:</b></p>
+        <!-- यहाँ अपना QR इमेज का लिंक या फाइल नाम डालें -->
+        <img src="your-qr-code.png" alt="PhonePe QR">
+        <br>
+        <a href="https://your-phonepe-payment-link" target="_blank" style="color: blue; font-size: 13px; display:inline-block; margin-top:5px;">या डायरेक्ट PhonePe लिंक से पे करें</a>
+    </div>
+
+    <p class="note">* पहले पेमेंट करें। पेमेंट सक्सेस होने के बाद आर्डर आपके WhatsApp पर स्वतः आ जाएगा।</p>
+
+    <button onclick="sendOrderToWhatsApp()">पेमेंट हो गया है, आर्डर भेजें</button>
+</div>
+
+<script>
+    function sendOrderToWhatsApp() {
+        const email = document.getElementById("user-email").value;
+        const service = document.getElementById("service-type").value;
+        const quantity = document.getElementById("quantity").value;
+        const link = document.getElementById("user-link").value;
+
+        if(!email || !quantity || !link) {
+            alert("कृपया सभी जानकारी (Gmail, क्वांटिटी और लिंक) भरें!");
+            return;
+        }
+
+        // आपका WhatsApp नंबर जिस पर मैसेज जाएगा
+        const adminNumber = "9907958709"; 
+
+        // WhatsApp मैसेज का फॉर्मेट
+        const message = `नया आर्डर आया है!\n\n` +
+                        `📧 Gmail: ${email}\n` +
+                        `🎯 सर्विस: ${service}\n` +
+                        `📦 मात्रा: ${quantity}\n` +
+                        `🔗 लिंक: ${link}\n\n` +
+                        `पेमेंट सक्सेस हो गया है। कृपया चेक करके सर्विस दें।`;
+
+        // WhatsApp ऐप पर ऑटोमैटिक मैसेज भेजने का लिंक
+        const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
+
+        // यूज़र के फोन में WhatsApp खोल देगा जिसमें सारी डिटेल लिखी होगी
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
