@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asim Bhai - SMM Panel</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue: #1769ff;
+    --blue-dark: #0d47c9;
+    --blue-light: #eef5ff;
+    --border: #dfe7f1;
+    --text: #172033;
+    --muted: #718096;
+    --white: #ffffff;
+    --background: #f5f8fc;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --shadow: 0 15px 45px rgba(23, 65, 125, .10);
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   AUTH SCREEN
+========================= */
+
+#loginSection {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    background:
+        radial-gradient(circle at 10% 10%, #dceaff, transparent 32%),
+        radial-gradient(circle at 90% 90%, #e8f2ff, transparent 32%),
+        var(--background);
+}
+
+.auth-card {
+    width: min(440px, 100%);
+    padding: 35px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(20, 60, 120, .13);
+    animation: fadeUp .45s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1769ff, #64a7ff);
+}
+
+.logo-text {
+    color: var(--blue);
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.auth-card h1 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 7px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* GOOGLE BUTTON */
+
+.google-button {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    border: 1px solid #d5dbe5;
+    border-radius: 11px;
+
+    background: white;
+    color: #202124;
+
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.google-button:hover {
+    background: #f8fafc;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.google-icon {
+    color: #4285f4;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 20px;
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.tabs button {
+    border: 0;
+    padding: 11px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.tabs button.active {
+    background: white;
+    color: var(--blue);
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 49px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    background: white;
+    color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(23,105,255,.08);
+}
+
+.primary-button {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #1769ff, #4c98ff);
+    color: white;
+    font-weight: 800;
+}
+
+.auth-note {
+    text-align: center;
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+#dashboardSection {
+    display: none;
+    min-height: 100vh;
+}
+
+.navbar {
+    height: 72px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    color: var(--blue);
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wallet {
+    padding: 9px 14px;
+    border: 1px solid #d8e7ff;
+    border-radius: 10px;
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    font-weight: 800;
+}
+
+.profile {
+    position: relative;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 5px 9px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: white;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, #1769ff, #64a7ff);
+    color: white;
+    font-weight: 900;
+}
+
+.profile-menu {
+    width: 180px;
+
+    position: absolute;
+    top: 49px;
+    right: 0;
+
+    display: none;
+
+    overflow: hidden;
+
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.profile-menu.show {
+    display: block;
+}
+
+.profile-menu button {
+    width: 100%;
+    padding: 13px 15px;
+    border: 0;
+    background: white;
+    text-align: left;
+}
+
+.profile-menu button:hover {
+    background: var(--blue-light);
+    color: var(--blue);
+}
+
+.main {
+    width: min(1180px, 92%);
+    margin: 35px auto;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-heading {
+    margin-bottom: 24px;
+}
+
+.page-heading h1 {
+    font-size: 29px;
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    color: var(--muted);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr .85fr;
+    gap: 24px;
+}
+
+.card {
+    padding: 27px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    margin-bottom: 22px;
+    font-size: 19px;
+}
+
+.service-info {
+    margin-top: -7px;
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.action-button {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #1769ff, #4c98ff);
+    color: white;
+    font-weight: 800;
+}
+
+.action-button:hover {
+    background: var(--blue-dark);
+}
+
+/* =========================
+   PRICE MACHINE
+========================= */
+
+.machine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gauge {
+    width: 230px;
+    height: 125px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0 20px;
+}
+
+.gauge-bg,
+.gauge-fill {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+}
+
+.gauge-bg {
+    border: 20px solid #e8f0fa;
+    border-bottom-color: transparent;
+    transform: rotate(45deg);
+}
+
+.gauge-fill {
+    border: 20px solid transparent;
+    border-top-color: var(--blue);
+    border-left-color: var(--blue);
+    border-bottom-color: var(--blue);
+    transform: rotate(45deg);
+    transition: transform .4s ease;
+}
+
+.gauge-center {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.gauge-center strong {
+    display: block;
+    font-size: 25px;
+}
+
+.gauge-center span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.charge-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px;
+    border: 1px solid #d8e7ff;
+    border-radius: 14px;
+    background: var(--blue-light);
+}
+
+.charge-box span {
+    color: var(--muted);
+}
+
+.charge-box strong {
+    color: var(--blue);
+    font-size: 24px;
+}
+
+/* =========================
+   ADD FUNDS
+========================= */
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.payment-card {
+    padding: 27px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.payment-icon {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 15px;
+    border-radius: 13px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-weight: 900;
+}
+
+.payment-card h3 {
+    margin-bottom: 7px;
+}
+
+.payment-card > p {
+    margin-bottom: 20px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.qr-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 17px 0 20px;
+}
+
+.qr-wrap img {
+    width: 175px;
+    height: 175px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.phonepe-link {
+    display: block;
+    padding: 14px;
+    margin-bottom: 19px;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    background: #f0fdf4;
+    color: #15803d;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification {
+    width: min(410px, calc(100% - 40px));
+
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 500;
+
+    display: none;
+
+    padding: 16px 18px;
+
+    border-left: 5px solid var(--danger);
+    border-radius: 12px;
+
+    background: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,.13);
+}
+
+.notification.show {
+    display: block;
+}
+
+.notification.success {
+    border-left-color: var(--success);
+}
+
+.notification strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.notification p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* =========================
+   PAYMENT MODAL
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(10,25,55,.58);
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: min(440px, 100%);
+    padding: 31px;
+    border-radius: 21px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,.22);
+    animation: modalIn .25s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.spinner {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 20px;
+    border: 5px solid #dceaff;
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.success-icon {
+    width: 65px;
+    height: 65px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 17px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: var(--success);
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.modal h3 {
+    margin-bottom: 10px;
+    font-size: 21px;
+}
+
+.modal p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.modal-button {
+    width: 100%;
+    height: 48px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-weight: 800;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+    .dashboard-grid,
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 4%;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    .wallet {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .profile-button span {
+        display: none;
+    }
+
+    .main {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .card,
+    .payment-card {
+        padding: 21px;
+    }
+
+    .auth-card {
+        padding: 28px 21px;
+    }
+
+    .page-heading h1 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ======================================================
+     LOGIN SECTION
+====================================================== -->
+
+<section id="loginSection">
+
+    <div class="auth-card">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                A
+            </div>
+
+            <div class="logo-text">
+                Asim Bhai
+            </div>
+
+        </div>
+
+        <h1 id="authTitle">
+            Welcome Back
+        </h1>
+
+        <p class="auth-subtitle">
+            Sign in or create an account to access your SMM Panel.
+        </p>
+
+
+        <!-- IMPORTANT:
+             Direct inline onclick event.
+             No Google API.
+             No Firebase.
+             No backend.
+        -->
+
+        <button
+            type="button"
+            class="google-button"
+            onclick="handleGoogleLogin()"
+        >
+            <span class="google-icon">G</span>
+            Continue with Google
+        </button>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <div class="tabs">
+
+            <button
+                id="loginTab"
+                class="active"
+                type="button"
+                onclick="switchAuthMode('login')"
+            >
+                Login
+            </button>
+
+            <button
+                id="signupTab"
+                type="button"
+                onclick="switchAuthMode('signup')"
+            >
+                Sign Up
+            </button>
+
+        </div>
+
+
+        <form
+            id="authForm"
+            onsubmit="handleTraditionalAuth(event)"
+        >
+
+            <div
+                id="nameGroup"
+                class="form-group hidden"
+            >
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                id="confirmGroup"
+                class="form-group hidden"
+            >
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                >
+
+            </div>
+
+
+            <button
+                id="authButton"
+                class="primary-button"
+                type="submit"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="auth-note">
+            Frontend demo. No real authentication service is used.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     MAIN DASHBOARD SECTION
+====================================================== -->
+
+<section id="dashboardSection">
+
+    <nav class="navbar">
+
+        <div class="brand">
+            Asim Bhai
+        </div>
+
+
+        <div class="nav-right">
+
+            <div class="wallet">
+                Wallet: ₹<span id="walletBalance">150.00</span>
+            </div>
+
+
+            <div class="profile">
+
+                <button
+                    class="profile-button"
+                    type="button"
+                    onclick="toggleProfileMenu(event)"
+                >
+
+                    <div
+                        id="avatar"
+                        class="avatar"
+                    >
+                        A
+                    </div>
+
+                    <span id="profileName">
+                        Asim Bhai
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="profileMenu"
+                    class="profile-menu"
+                >
+
+                    <button
+                        type="button"
+                        onclick="showPage('homePage')"
+                    >
+                        New Order
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="showPage('fundsPage')"
+                    >
+                        Add Funds
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="logout()"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <main class="main">
+
+        <!-- NEW ORDER -->
+
+        <section
+            id="homePage"
+            class="page active"
+        >
+
+            <div class="page-heading">
+
+                <h1>
+                    New Order
+                </h1>
+
+                <p>
+                    Choose a service and place your social media order.
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="card">
+
+                    <h2>
+                        Order Details
+                    </h2>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Service
+                        </label>
+
+                        <select
+                            id="service"
+                            onchange="calculatePrice()"
+                        >
+
+                            <option value="postViews">
+                                Instagram Post Views
+                            </option>
+
+                            <option value="reelViews">
+                                Instagram Reel Views
+                            </option>
+
+                            <option value="likes">
+                                Instagram Likes
+                            </option>
+
+                            <option value="followers">
+                                Instagram Followers
+                            </option>
+
+                            <option value="comments">
+                                Instagram Comments
+                            </option>
+
+                            <option value="storyViews">
+                                Instagram Story Views
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        id="serviceInfo"
+                        class="service-info"
+                    >
+                        Rate: ₹20 per 10,000 quantity
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Instagram Link
+                        </label>
+
+                        <input
+                            id="link"
+                            type="text"
+                            placeholder="Account Must be Public"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                      <button
+    type="button"
+    class="google-button"
+    onclick="handleGoogleLogin()"
+>
+    <span class="google-icon">G</span>
+    Continue with Google
+                      </button>function handleGoogleLogin() {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("dashboardSection").style.display = "block";
+    showPage("homePage");
+}
