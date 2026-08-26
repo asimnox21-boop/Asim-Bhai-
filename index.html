@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070d">
+<title>Asim Bhai • Free Fire Sensitivity Hub</title>
+
+<style>
+/* =========================================================
+   GLOBAL
+========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #05070d;
+    --card: #0c101a;
+    --card-2: #111725;
+    --border: rgba(255,255,255,.08);
+    --text: #f5f7ff;
+    --muted: #8e98aa;
+    --blue: #1877f2;
+    --cyan: #00e5ff;
+    --purple: #8b5cf6;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #facc15;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(24,119,242,.14), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(139,92,246,.12), transparent 30%),
+        linear-gradient(145deg, #03050a, #080c15 55%, #05070d);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* =========================================================
+   LOGIN SCREEN
+========================================================= */
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-wrapper {
+    width: min(100%, 430px);
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.brand-logo {
+    width: 72px;
+    height: 72px;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    box-shadow: 0 0 45px rgba(24,119,242,.3);
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.brand h1 {
+    margin-top: 15px;
+    font-size: 26px;
+}
+
+.brand p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.login-card {
+    background: rgba(12,16,26,.9);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.5),
+        inset 0 1px rgba(255,255,255,.04);
+    backdrop-filter: blur(20px);
+}
+
+.login-card h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap input {
+    width: 100%;
+    padding: 14px 15px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    outline: none;
+    background: #080c14;
+    color: white;
+    font-size: 15px;
+    transition: .2s ease;
+}
+
+.input-wrap input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(24,119,242,.12);
+}
+
+.input-wrap input.invalid {
+    border-color: var(--red);
+}
+
+.error {
+    min-height: 18px;
+    margin-top: 5px;
+    color: #f87171;
+    font-size: 12px;
+}
+
+.password-note {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.login-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 13px;
+    padding: 14px;
+    color: white;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #1877f2, #4267b2);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(24,119,242,.25);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.demo-info {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(250,204,21,.06);
+    border: 1px solid rgba(250,204,21,.15);
+    color: #d8dee9;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   ALERT
+========================================================= */
+.alert {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translate(-50%, -150%);
+    width: min(calc(100% - 30px), 440px);
+    padding: 14px 16px;
+    border-radius: 14px;
+    z-index: 9999;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .35s ease;
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.alert.show {
+    transform: translate(-50%, 0);
+}
+
+.alert.error-alert {
+    background: #321015;
+    border: 1px solid #7f1d1d;
+    color: #fecaca;
+}
+
+.alert.success-alert {
+    background: #062b18;
+    border: 1px solid #166534;
+    color: #bbf7d0;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+.dashboard {
+    display: none;
+    min-height: 100vh;
+}
+
+.dashboard.active {
+    display: block;
+    animation: fadeIn .45s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,7,13,.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+}
+
+.nav-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+}
+
+.logout {
+    border: 1px solid var(--border);
+    background: #0c101a;
+    color: #dbeafe;
+    border-radius: 10px;
+    padding: 9px 14px;
+    cursor: pointer;
+}
+
+.container {
+    width: min(1150px, 92%);
+    margin: auto;
+}
+
+.hero {
+    padding: 55px 0 35px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr;
+    gap: 25px;
+    align-items: stretch;
+}
+
+.hero-card {
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 34px;
+    background:
+        linear-gradient(135deg, rgba(24,119,242,.1), rgba(139,92,246,.05)),
+        var(--card);
+}
+
+.hero-card h1 {
+    font-size: clamp(30px, 5vw, 55px);
+    line-height: 1;
+    letter-spacing: -1.5px;
+}
+
+.hero-card h1 span {
+    background: linear-gradient(90deg, var(--cyan), #818cf8);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-card p {
+    margin-top: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.status-card {
+    border-radius: 25px;
+    padding: 25px;
+    border: 1px solid var(--border);
+    background: var(--card);
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #bbf7d0;
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--green);
+}
+
+.stat {
+    margin-top: 25px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 31px;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* =========================================================
+   SENSITIVITY
+========================================================= */
+.section-title {
+    margin: 30px 0 20px;
+}
+
+.section-title h2 {
+    font-size: 26px;
+}
+
+.section-title p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.device-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.device-header {
+    padding: 25px;
+    background:
+        linear-gradient(135deg, rgba(0,229,255,.08), rgba(139,92,246,.08));
+    border-bottom: 1px solid var(--border);
+}
+
+.device-header h3 {
+    font-size: 22px;
+}
+
+.device-header p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.sensitivity-grid {
+    padding: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.sensitivity {
+    position: relative;
+    padding: 20px;
+    border-radius: 17px;
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.sensitivity::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(var(--cyan), var(--purple));
+}
+
+.sensitivity span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.sensitivity strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 30px;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+.features {
+    margin: 45px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.feature {
+    padding: 22px;
+    border-radius: 19px;
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.feature-icon {
+    font-size: 25px;
+}
+
+.feature h3 {
+    margin-top: 12px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 7px;
+}
+
+.whatsapp-btn {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 17px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    background: #128c7e;
+    font-weight: 800;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+@media (max-width: 800px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sensitivity-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .login-screen {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 21px;
+        border-radius: 20px;
+    }
+
+    .hero {
+        padding-top: 30px;
+    }
+
+    .hero-card {
+        padding: 25px;
+    }
+
+    .sensitivity-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .navbar {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .nav-brand {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     ALERT SYSTEM
+======================================================= -->
+<div id="alert" class="alert"></div>
+
+<!-- =======================================================
+     LOGIN SCREEN
+======================================================= -->
+<section id="loginScreen" class="login-screen">
+
+    <div class="login-wrapper">
+
+        <div class="brand">
+            <div class="brand-logo">FF</div>
+            <h1>Asim Bhai Gaming</h1>
+            <p>Free Fire Sensitivity Hub</p>
+        </div>
+
+        <div class="login-card">
+
+            <h2>Welcome Back</h2>
+            <p class="subtitle">
+                Sign in to access your device sensitivity settings.
+            </p>
+
+            <form id="loginForm" novalidate>
+
+                <div class="field">
+                    <label for="identity">
+                        Email or Phone Number
+                    </label>
+
+                    <div class="input-wrap">
+                        <input
+                            id="identity"
+                            type="text"
+                            autocomplete="username"
+                            placeholder="Enter email or phone number"
+                        >
+                    </div>
+
+                    <div id="identityError" class="error"></div>
+                </div>
+
+                <div class="field">
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrap">
+                        <input
+                            id="password"
+                            type="password"
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                        >
+                    </div>
+
+                    <div id="passwordError" class="error"></div>
+
+                    <div class="password-note">
+                        Password must contain at least 8 characters.
+                    </div>
+                </div>
+
+                <button class="login-btn" type="submit">
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="demo-info">
+                <strong>Security notice:</strong>
+                This standalone demo validates the form locally but does
+                not transmit or store passwords. Connect a legitimate
+                authentication provider before using it for real accounts.
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     DASHBOARD
+======================================================= -->
+<main id="dashboard" class="dashboard">
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+            <div class="nav-icon">FF</div>
+            <span>ASIM BHAI GAMING</span>
+        </div>
+
+        <button id="logoutBtn" class="logout">
+            Logout
+        </button>
+
+    </nav>
+
+    <div class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-grid">
+
+                <div class="hero-card">
+                    <h1>
+                        Free Fire<br>
+                        <span>Sensitivity Hub</span>
+                    </h1>
+
+                    <p>
+                        Optimized sensitivity configurations designed for
+                        competitive gameplay, faster drag shots and improved
+                        aim control.
+                    </p>
+
+                    <a
+                        id="whatsappBtn"
+                        class="whatsapp-btn"
+                        href="#"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        WhatsApp Support
+                    </a>
+                </div>
+
+                <div class="status-card">
+
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        System Online
+                    </div>
+
+                    <div class="stat">
+                        <strong>1</strong>
+                        <span>Optimized Device Profile</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>6</strong>
+                        <span>Sensitivity Parameters</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SENSITIVITY -->
+        <section>
+
+            <div class="section-title">
+                <h2>🎯 Device Sensitivity</h2>
+                <p>
+                    Recommended Free Fire configuration for competitive play.
+                </p>
+            </div>
+
+            <div class="device-card">
+
+                <div class="device-header">
+                    <h3>📱 Realme 14 Pro Plus 5G</h3>
+                    <p>Balanced drag + headshot configuration</p>
+                </div>
+
+                <div class="sensitivity-grid">
+
+                    <div class="sensitivity">
+                        <span>General</span>
+                        <strong>190</strong>
+                    </div>
+
+                    <div class="sensitivity">
+                        <span>Red Dot</span>
+                        <strong>185</strong>
+                    </div>
+
+                    <div class="sensitivity">
+                        <span>2x Scope</span>
+                        <strong>175</strong>
+                    </div>
+
+                    <div class="sensitivity">
+                        <span>4x Scope</span>
+                        <strong>165</strong>
+                    </div>
+
+                    <div class="sensitivity">
+                        <span>Sniper Scope</span>
+                        <strong>95</strong>
+                    </div>
+
+                    <div class="sensitivity">
+                        <span>DPI</span>
+                        <strong>600</strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Drag</h3>
+                <p>
+                    Balanced General and Red Dot values for smoother
+                    drag-shot control.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Precision Aim</h3>
+                <p>
+                    Scope settings are tuned to maintain stability while
+                    tracking moving opponents.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Device Optimized</h3>
+                <p>
+                    Configuration specifically organized around the
+                    Realme 14 Pro Plus 5G.
+                </p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+        © 2026 Asim Bhai Gaming • Free Fire Community Hub
+    </footer>
+
+</main>
+
+<script>
+/* =========================================================
+   DOM REFERENCES
+========================================================= */
+
+const loginScreen = document.getElementById("loginScreen");
+const dashboard = document.getElementById("dashboard");
+
+const loginForm = document.getElementById("loginForm");
+
+const identityInput = document.getElementById("identity");
+const passwordInput = document.getElementById("password");
+
+const identityError = document.getElementById("identityError");
+const passwordError = document.getElementById("passwordError");
+
+const alertBox = document.getElementById("alert");
+const logoutBtn = document.getElementById("logoutBtn");
+const whatsappBtn = document.getElementById("whatsappBtn");
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const WHATSAPP_NUMBER = "919907958709";
+
+/*
+ * IMPORTANT:
+ * The password is deliberately NEVER placed into this message.
+ */
+function createWhatsAppMessage(identity) {
+    return [
+        "🎮 ASIM BHAI GAMING",
+        "",
+        "A user successfully accessed the Free Fire Sensitivity Hub.",
+        "",
+        `User: ${identity}`,
+        "Status: Authentication successful",
+        "Dashboard: Sensitivity Hub"
+    ].join("\n");
+}
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+let alertTimer;
+
+function showAlert(message, type = "error-alert") {
+
+    clearTimeout(alertTimer);
+
+    alertBox.textContent = message;
+    alertBox.className = `alert ${type} show`;
+
+    alertTimer = setTimeout(() => {
+        alertBox.classList.remove("show");
+    }, 3500);
+}
+
+/* =========================================================
+   VALIDATION HELPERS
+========================================================= */
+
+function validateIdentity(value) {
+
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+        return "Email or phone number is required.";
+    }
+
+    /*
+     * Email validation
+     */
+    if (trimmed.includes("@")) {
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        if (!emailPattern.test(trimmed)) {
+            return "Please enter a valid email address.";
+        }
+
+        return "";
+    }
+
+    /*
+     * Phone validation:
+     * Allows optional + and 10–15 digits.
+     */
+    const phonePattern =
+        /^\+?[0-9]{10,15}$/;
+
+    if (!phonePattern.test(trimmed.replace(/\s/g, ""))) {
+        return "Please enter a valid phone number.";
+    }
+
+    return "";
+}
+
+function validatePassword(value) {
+
+    if (!value) {
+        return "Password is required.";
+    }
+
+    if (value.length < 8) {
+        return "Password 
